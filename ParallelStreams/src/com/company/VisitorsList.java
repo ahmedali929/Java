@@ -6,14 +6,20 @@ import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
+import java.util.stream.Stream;
 
 //this program is handling how to multithreading lists and arrays
 public class VisitorsList {
 
+    private final static CopyOnWriteArrayList<Person> masterList;
+
+    static {
+        masterList = Stream.generate(Person::new)
+                .distinct()
+                .limit(2500)
+                .collect(CopyOnWriteArrayList::new, CopyOnWriteArrayList::add, CopyOnWriteArrayList::addAll);
+    }
     private static final ArrayBlockingQueue<Person> newVisitors = new ArrayBlockingQueue<>(5);
 
     public static void main(String[] args) {
@@ -21,7 +27,7 @@ public class VisitorsList {
         Runnable producer = () -> {
 
             Person visitor = new Person();
-            System.out.println("Adding " + visitor);
+            System.out.println("Queueing " + visitor);
             boolean queued = false;
             try {
                 queued = newVisitors.offer(visitor, 5, TimeUnit.SECONDS);
@@ -29,7 +35,7 @@ public class VisitorsList {
                 throw new IllegalArgumentException(e);
             }
             if (queued) {
-                System.out.println(newVisitors);
+//                System.out.println(newVisitors);
             } else {
                 System.out.println("The queue is full, cannot add " + visitor);
                 System.out.println("Draining Queue and writing data to file");
@@ -47,12 +53,37 @@ public class VisitorsList {
             }
         };
 
-        ScheduledExecutorService producerExecutor = Executors.newSingleThreadScheduledExecutor();
-        producerExecutor.scheduleWithFixedDelay(producer, 0, 1, TimeUnit.SECONDS);
+        Runnable consumer = () -> {
+            String threadName = Thread.currentThread().getName();
+            System.out.println(threadName + " Polling Queue " + newVisitors.size());
+            Person visitor = null;
+            try {
+                visitor = newVisitors.take();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            if (visitor != null) {
+                System.out.println(threadName + " " + visitor);
+                if (!masterList.contains(visitor)) {
+                    masterList.add(visitor);
+                    System.out.println("---> New Visitor gets Coupon!: " + visitor);
+                }
+            }
+            System.out.println(threadName + " done " + newVisitors.size());
+        };
 
+        ScheduledExecutorService consumerPool = Executors.newScheduledThreadPool(3);
+        for (int i = 0; i < 3; i++) {
+            consumerPool.scheduleAtFixedRate(consumer, 6, 1, TimeUnit.SECONDS);
+        }
+
+        ScheduledExecutorService producerExecutor = Executors.newSingleThreadScheduledExecutor();
+        producerExecutor.scheduleWithFixedDelay(producer, 0, 3, TimeUnit.SECONDS);
+
+        //this while loop times the producerExecutor program
         while (true) {
             try {
-                if (!producerExecutor.awaitTermination(20, TimeUnit.SECONDS))
+                if (!producerExecutor.awaitTermination(10, TimeUnit.SECONDS))
                     break;
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
@@ -60,6 +91,18 @@ public class VisitorsList {
         }
 
         producerExecutor.shutdown();
+
+        //this while loop times the consumerPool program
+        while (true) {
+            try {
+                if (!consumerPool.awaitTermination(3, TimeUnit.SECONDS))
+                    break;
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        consumerPool.shutdown();
 
     }
 
