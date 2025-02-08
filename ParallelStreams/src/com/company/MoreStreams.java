@@ -1,6 +1,7 @@
 package com.company;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentSkipListMap;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -82,6 +83,24 @@ public class MoreStreams {
         lastNameCounts.entrySet().forEach(System.out::println);
 
         System.out.println(lastNameCounts.getClass().getName());
+
+        //a ConcurrentSkipListMap is a way to use Maps in parallel. HashMaps and TreeMaps aren't thread-safe
+        var lastCounts = new ConcurrentSkipListMap<String, Long>();
+        Stream.generate(Person::new)
+                .limit(10000)
+                .parallel()
+                .forEach((person) -> lastCounts.merge(person.lastName(), 1L, Long::sum));
+
+        System.out.println(lastCounts);
+
+        int total = 0;
+        for (Long count: lastCounts.values()) {
+            total += count;
+        }
+
+        System.out.println("Total = " + total);
+        System.out.println(lastCounts.getClass().getName());
+
 
     }
 
