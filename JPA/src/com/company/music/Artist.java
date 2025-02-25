@@ -1,9 +1,10 @@
 package com.company.music;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.TreeSet;
 
 @Entity
 @Table(name = "artists")
@@ -14,6 +15,10 @@ public class Artist {
 
     @Column(name="artist_name")
     private String artistName;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name="artist_id")
+    private List<Album> albums = new ArrayList<>();
 
     public Artist() {
     }
@@ -31,8 +36,22 @@ public class Artist {
         return artistName;
     }
 
+    public List<Album> getAlbum() {
+        return albums;
+    }
+
     public void setArtistName(String artistName) {
         this.artistName = artistName;
+    }
+
+    public void addAlubm(String albumName) {
+        albums.add(new Album(albumName));
+    }
+
+    public void removeDuplicates() {
+        var set = new TreeSet<>(albums);
+        albums.clear();
+        albums.addAll(set);
     }
 
     @Override
@@ -40,6 +59,7 @@ public class Artist {
         return "Artist{" +
                 "artistId=" + artistId +
                 ", artistName=" + artistName +
+                ", albums=" + albums +
                 '}';
     }
 }
