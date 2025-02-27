@@ -20,7 +20,7 @@ public class MainQuery {
             artists = getArtistsJPQL(em, "%Stev%");
             artists.forEach(System.out::println);
             transaction.commit();
-
+//this is a test
         } catch (Exception e) {
             e.printStackTrace();
         }
