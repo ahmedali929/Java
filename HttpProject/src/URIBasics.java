@@ -6,14 +6,16 @@ import java.net.URL;
 public class URIBasics {
     public static void main(String[] args) {
 
-        URI testSite = URI.create("https://ahmedali7997.com/test");
+        URI baseSite = URI.create("https://ahmedali7997.com");
+        URI testSite = URI.create("test/this-is-a-test");
         print(testSite);
 
         try {
             URI uri = new URI("http://user:pw@store.com:5000/products/phones?os=android#samsung");
             print(uri);
 
-            URL url = testSite.toURL();
+            URI completeSite = baseSite.resolve(testSite);
+            URL url = completeSite.toURL();
             System.out.println(url);
         } catch (URISyntaxException | MalformedURLException e) {
             throw new RuntimeException(e);
