@@ -6,14 +6,12 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.Duration;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 import java.util.stream.Stream;
 
 import static java.net.HttpURLConnection.HTTP_OK;
 
-public class AsyncClientGet {
+public class AsyncHandlerClient {
 
     public static void main(String[] args) {
 
@@ -32,20 +30,18 @@ public class AsyncClientGet {
             HttpResponse<Stream<String>> response;
             CompletableFuture<HttpResponse<Stream<String>>> responseFuture = client.sendAsync(request, HttpResponse.BodyHandlers.ofLines());
 
+            responseFuture.thenApply(AsyncHandlerClient::filterResponse)
+                    .thenApply(AsyncHandlerClient::transformResponse)
+                    .thenAccept(AsyncHandlerClient::printResponse)
+                    .thenRun(() -> {for (int i=0; i<10; i++) System.out.println(i);})
+                    .thenRun(System.out::println);
 
-            while (true) {
-                try {
-                    response = responseFuture.get(1, TimeUnit.SECONDS);
-                    if (response != null) break;
-                } catch (ExecutionException e) {
-                    throw new RuntimeException(e);
-                } catch (TimeoutException e) {
-                    System.out.println(".");
-                }
+            System.out.println("Ten jobs to do besides handling the response");
+            int jobs = 0;
+            while (jobs ++ < 10) {
+                TimeUnit.SECONDS.sleep(1);
+                System.out.printf("Job %d", jobs);
             }
-            System.out.println();
-
-            handleResponse(response);
 
         } catch (IOException | InterruptedException | URISyntaxException e) {
             throw new RuntimeException(e);
@@ -62,6 +58,26 @@ public class AsyncClientGet {
         } else {
             System.out.println("Error reading response " + response.uri());
         }
+    }
+
+    private static Stream<String> filterResponse(HttpResponse<Stream<String>> response) {
+        System.out.println("Filtering response....");
+        if (response.statusCode() == HTTP_OK) {
+            return response.body()
+                    .filter(s -> s.contains("<h1>"));
+        } else {
+            return Stream.empty();
+        }
+    }
+
+    private static Stream<String> transformResponse(Stream<String> response) {
+        System.out.println("Transforming Response");
+        return response.map(s -> s.replaceAll("<[^>]*>", "").strip());
+    }
+
+    private static void printResponse(Stream<String> response) {
+        System.out.println("printing response");
+        response.forEach(System.out::println);
     }
 
 }
