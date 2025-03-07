@@ -1,11 +1,12 @@
 package com.company.dice;
 
-import dev.lpa.game.GameAction;
+import com.company.game.Game;
+import com.company.game.GameAction;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class DiceGame extends dev.lpa.game.Game<DicePlayer> {
+public class DiceGame extends Game<DicePlayer> {
     public DiceGame(String gameName) {
         super(gameName);
     }
@@ -16,16 +17,15 @@ public class DiceGame extends dev.lpa.game.Game<DicePlayer> {
     }
 
     @Override
-    public Map<Character, dev.lpa.game.GameAction> getGameActions(int playerIndex) {
+    public Map<Character, GameAction> getGameActions(int playerIndex) {
 
-        Map<Character, dev.lpa.game.GameAction> map = new LinkedHashMap<>(Map.of('R', new GameAction('R', "Roll Dice", this::rollDice)));
+        Map<Character, GameAction> map = new LinkedHashMap<>(Map.of('R', new GameAction('R', "Roll Dice", this::rollDice)));
         map.putAll(getStandardActions());
         return map;
 
     }
 
     private boolean rollDice(int playerIndex) {
-        getPlayer(playerIndex).rollDice();
-        return false;
+        return getPlayer(playerIndex).rollDiceAndSelect();
     }
 }

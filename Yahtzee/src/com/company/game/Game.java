@@ -1,4 +1,6 @@
-package dev.lpa.game;
+package com.company.game;
+
+import com.company.game.GameAction;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;

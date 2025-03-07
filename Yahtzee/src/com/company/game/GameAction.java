@@ -1,4 +1,4 @@
-package dev.lpa.game;
+package com.company.game;
 
 import java.util.function.Predicate;
 

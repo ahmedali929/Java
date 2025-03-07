@@ -1,6 +1,7 @@
 package com.company;
 
 import com.company.dice.DiceGame;
+import com.company.game.GameConsole;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +15,7 @@ public class MainGame {
 //            System.out.printf("Score for %s is %d %n", s, s.score(currentDice));
 //        }
 
-        var console = new dev.lpa.game.GameConsole<>(new DiceGame("Dice Rolling Game"));
+        var console = new GameConsole<>(new DiceGame("Dice Rolling Game"));
         console.playGame(console.addPlayer());
 
     }

@@ -1,4 +1,4 @@
-package dev.lpa.game;
+package com.company.game;
 
 public interface Player {
 

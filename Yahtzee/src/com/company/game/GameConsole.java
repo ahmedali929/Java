@@ -1,5 +1,4 @@
-package dev.lpa.game;
-
+package com.company.game;
 import java.util.Scanner;
 
 public final class GameConsole<T extends Game<? extends Player>> {
@@ -33,7 +32,7 @@ public final class GameConsole<T extends Game<? extends Player>> {
             System.out.print("Enter Next Action: ");
 
             char nextMove = scanner.nextLine().toUpperCase().charAt(0);
-            GameAction gameAction = gameActions.get(nextMove);
+            com.company.game.GameAction gameAction = gameActions.get(nextMove);
 
             if (gameAction != null) {
                 System.out.println("-------------------------------------------");
@@ -43,5 +42,10 @@ public final class GameConsole<T extends Game<? extends Player>> {
                 }
             }
         }
+    }
+
+    public static String getUserInput(String prompt) {
+        System.out.println(prompt + ": ");
+        return scanner.nextLine();
     }
 }

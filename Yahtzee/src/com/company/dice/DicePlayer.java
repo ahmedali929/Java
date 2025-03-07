@@ -1,16 +1,19 @@
 package com.company.dice;
 
+import com.company.game.GameConsole;
+import com.company.game.Player;
+
 import java.util.*;
 
-public class DicePlayer implements dev.lpa.game.Player {
+public class DicePlayer implements Player {
 
     private final String name;
     private final List<Integer> currentDice = new ArrayList<>();
-    private final Map<dev.lpa.dice.ScoredItem, Integer> scoreCard = new EnumMap<>(dev.lpa.dice.ScoredItem.class);
+    private final Map<ScoredItem, Integer> scoreCard = new EnumMap<>(ScoredItem.class);
 
     public DicePlayer(String name) {
         this.name = name;
-        for (dev.lpa.dice.ScoredItem item : dev.lpa.dice.ScoredItem.values()) {
+        for (ScoredItem item : ScoredItem.values()) {
             scoreCard.put(item, null);
         }
     }
@@ -41,6 +44,80 @@ public class DicePlayer implements dev.lpa.game.Player {
         currentDice.addAll(newDice);
 
         System.out.println("Your dice are: " + currentDice);
+    }
+
+    private  boolean pickLosers() {
+
+        String prompt = """
+                
+                Press Enter to Score.
+                Type "ALL" to re-roll all the dice.
+                List numbers (separated by spaces) to re-roll selected dice.
+                
+                """;
+        String userInput = GameConsole.getUserInput(prompt + "--> ");
+
+        if(userInput.isBlank()) {
+            return true;
+        }
+        try {
+            removeDice(userInput.split(" "));
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+            System.out.println("Bad input, try again");
+        }
+        return false;
+    }
+
+    private void removeDice(String[] selected) {
+        if (selected.length == 1 && selected[0].contains("ALL")) {
+            currentDice.clear();
+        } else {
+            for (String removed : selected) {
+                currentDice.remove(Integer.valueOf(removed));
+            }
+            System.out.println("Keeping " + currentDice);
+        }
+    }
+
+    public boolean rollDiceAndSelect() {
+         do {
+            rollDice();
+         } while (!pickLosers());
+
+         do {
+             System.out.println("You must select a score category: ");
+         } while (!scoreDice());
+
+         currentDice.clear();
+         return (getItemList().size() == 0);
+    }
+
+    public List<String> getItemList() {
+
+        return scoreCard
+                .entrySet()
+                .stream()
+                .filter(e -> e.getValue() == null)
+                .map(e -> e.getKey().name())
+                .toList();
+    }
+
+    private boolean scoreDice() {
+        List<String> remainingItems = getItemList();
+        String prompt = String.join("\n", remainingItems.toArray(new String[0]));
+        String userInput = GameConsole.getUserInput(prompt +"\n--> ").toUpperCase();
+        if (userInput.isBlank()) {
+            return false;
+        }
+
+        if (!remainingItems.contains(userInput)) {
+            System.out.println("Invalid selection");
+            return false;
+        }
+        ScoredItem item = ScoredItem.valueOf(userInput);
+        scoreCard.put(item, item.score(currentDice));
+        return true;
     }
 
 }

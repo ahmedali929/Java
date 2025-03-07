@@ -1,4 +1,4 @@
-package dev.lpa.dice;
+package com.company.dice;
 
 import java.util.*;
 
