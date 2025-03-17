@@ -11,6 +11,7 @@ public class EncodeAndDecode {
         String encodeTest = encode((testStrings));
         System.out.println("This is the encoded string: " + encodeTest);
         System.out.println("This is the decoded string: " + decode(encodeTest));
+
     }
 
     public static String encode(List<String> s) {
