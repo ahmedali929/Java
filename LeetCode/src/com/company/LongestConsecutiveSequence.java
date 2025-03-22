@@ -31,7 +31,7 @@ public class LongestConsecutiveSequence {
             }
 
             //Check in the negative direction
-            int prevNum = num--;
+            int prevNum = num - 1;
             while (numsMap.containsKey(prevNum) && !numsMap.get(prevNum)) {
 
                 currentLength++;
