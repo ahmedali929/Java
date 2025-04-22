@@ -11,9 +11,8 @@ public class DemoController {
     //define a private field for the dependency
     private Coach theCoach;
 
-    //define a constructor for dependency injection
     @Autowired
-    public DemoController(Coach theCoach) {
+    public void setCoach(Coach theCoach) {
         this.theCoach = theCoach;
     }
 
