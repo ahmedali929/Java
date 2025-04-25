@@ -27,9 +27,7 @@ public class Student {
         this.lastName = lastName;
         this.email = email;
     }
-    public Student() {
-
-    }
+    public Student() {}
 
     // define getters and setters
 
