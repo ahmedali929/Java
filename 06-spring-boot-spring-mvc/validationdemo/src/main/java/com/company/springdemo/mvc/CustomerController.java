@@ -29,6 +29,9 @@ public class CustomerController {
         // Logging last name just to see if it actually exists
         System.out.println("Last Name: | " + theCustomer.getLastName() + " |");
 
+        System.out.println("Binding Results: " + theBindingResult.toString());
+
+
         if (theBindingResult.hasErrors()) {
             return "customer-form";
         } else {
