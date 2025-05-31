@@ -1,6 +1,6 @@
-package com.luv2code.springboot.thymeleademo.service;
+package com.luv2code.springboot.thymeleafdemo.service;
 
-import com.luv2code.springboot.thymeleademo.entity.Employee;
+import com.luv2code.springboot.thymeleafdemo.entity.Employee;
 
 import java.util.List;
 
