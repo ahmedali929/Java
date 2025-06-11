@@ -2,11 +2,11 @@ package com.company;
 
 public class kokoEatingBananas {
 
-    public int minEatingSpeed(int[] piles, int h) {
+    public static int minEatingSpeed(int[] piles, int h) {
 
-        int result = 0;
         int minSpeed = 1;
         int maxSpeed = 0;
+
         for (int pile : piles) {
             maxSpeed = Math.max(maxSpeed, pile);
         }
@@ -18,14 +18,14 @@ public class kokoEatingBananas {
                 hours += Math.ceil(pile/mid);
             }
             if (hours <= h) {
-                result = Math.min(result, mid);
+                minSpeed = Math.min(minSpeed, mid);
                 maxSpeed = mid - 1;
             } else {
                 minSpeed = mid + 1;
             }
         }
 
-        return result;
+        return minSpeed;
 
     }
 
