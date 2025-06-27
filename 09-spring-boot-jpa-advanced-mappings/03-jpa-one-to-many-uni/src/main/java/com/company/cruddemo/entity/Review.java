@@ -18,8 +18,7 @@ public class Review {
     // define constructors
     public Review() {}
 
-    public Review(int id, String comment) {
-        this.id = id;
+    public Review(String comment) {
         this.comment = comment;
     }
 
