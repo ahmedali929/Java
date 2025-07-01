@@ -9,20 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class MyDemoLoggingAspect {
 
-    @Pointcut("execution(* com.company.aopdemo.dao.*.*(..))")
-    private void forDaoPackage() {}
 
-    // create a pointcut for getter methods
-    @Pointcut("execution(* com.company.aopdemo.dao.*.get*(..))")
-    private void getter() {}
-
-    // create a pointcut for setter methods
-    @Pointcut("execution(* com.company.aopdemo.dao.*.set*(..))")
-    private void setter() {}
-
-    // create pointcut: include package ... exclude getter/setter
-    @Pointcut("forDaoPackage() && !(getter() || setter())")
-    private void forDaoPackageNoGetterSetter() {}
 
 
     @Before("forDaoPackageNoGetterSetter()")
@@ -35,9 +22,5 @@ public class MyDemoLoggingAspect {
         System.out.println("\n =====> Performing API Analytics");
     }
 
-    @Before("forDaoPackageNoGetterSetter()")
-    public void logToCloudAsync() {
-        System.out.println("\n =====> Logging to Cloud in Async Fashion");
-    }
 
 }
