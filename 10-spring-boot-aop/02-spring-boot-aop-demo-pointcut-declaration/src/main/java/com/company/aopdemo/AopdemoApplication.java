@@ -29,6 +29,8 @@ public class AopdemoApplication {
 
 		// call the business method
 		Account myAccount = new Account();
+		myAccount.setName("Goku");
+		myAccount.setLevel("Super Saiyan");
 		theAccountDAO.addAccount(myAccount, true);
 		theAccountDAO.doWork();
 
