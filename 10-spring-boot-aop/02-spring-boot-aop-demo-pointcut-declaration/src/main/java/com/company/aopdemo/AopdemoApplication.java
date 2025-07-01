@@ -39,8 +39,6 @@ public class AopdemoApplication {
 		String name = theAccountDAO.getName();
 		String code = theAccountDAO.getServiceCode();
 
-
-
 		// call the membership business method
 		theMembershipDAO.addMember();
 		theMembershipDAO.goToSleep();
