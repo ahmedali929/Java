@@ -26,7 +26,17 @@ public class MyDemoLoggingAspect {
         long begin = System.currentTimeMillis();
 
         // now, let's execute the method
-        Object result = theProceedingJoinPoint.proceed();
+        Object result = null;
+
+        try {
+            result = theProceedingJoinPoint.proceed();
+        } catch (Exception exc) {
+            //log the exception
+            System.out.println(exc.getMessage());
+
+            // give user a custom message
+            result = "Major accident! But no worries, take this detour on Main Street.";
+        }
 
         // get end timestamp
         long end = System.currentTimeMillis();
