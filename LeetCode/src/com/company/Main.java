@@ -5,8 +5,8 @@ public class Main {
     public static void main(String[] args) {
 	// write your code here
 
-        int[] piles = {3,6,7,11};
-        System.out.println(kokoEatingBananas.minEatingSpeed(piles, 8));
+        int[] piles = {30,11,23,4,20};
+        System.out.println(kokoEatingBananas.minEatingSpeed(piles, 6));
 
 
     }
