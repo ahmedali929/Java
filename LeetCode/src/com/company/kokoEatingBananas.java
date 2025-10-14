@@ -12,13 +12,13 @@ public class kokoEatingBananas {
             maxSpeed = Math.max(maxSpeed, pile);
         }
 
-        while (minSpeed < maxSpeed) {
+        while (minSpeed <= maxSpeed) {
             int mid = minSpeed + (maxSpeed - minSpeed) / 2;
-            int hours = 0;
+            long hours = 0;
             for (int pile : piles) {
                 hours += (int) Math.ceil((double) pile /mid);
             }
-            if (hours <= h) {
+            if (hours <= h && hours > Integer.MIN_VALUE && hours < Integer.MAX_VALUE) {
                 result = mid;
                 maxSpeed = mid - 1;
             } else {
@@ -26,7 +26,7 @@ public class kokoEatingBananas {
             }
         }
 
-        return minSpeed;
+        return result;
 
     }
 
