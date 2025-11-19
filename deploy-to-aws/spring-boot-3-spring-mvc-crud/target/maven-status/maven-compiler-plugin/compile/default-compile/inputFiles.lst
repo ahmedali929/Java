@@ -1,0 +1,7 @@
+/Users/ahmedali/Desktop/Java/Java/deploy-to-aws/spring-boot-3-spring-mvc-crud/src/main/java/com/luv2code/springboot/thymeleafdemo/ThymeleafdemoApplication.java
+/Users/ahmedali/Desktop/Java/Java/deploy-to-aws/spring-boot-3-spring-mvc-crud/src/main/java/com/luv2code/springboot/thymeleafdemo/controller/DemoController.java
+/Users/ahmedali/Desktop/Java/Java/deploy-to-aws/spring-boot-3-spring-mvc-crud/src/main/java/com/luv2code/springboot/thymeleafdemo/controller/EmployeeController.java
+/Users/ahmedali/Desktop/Java/Java/deploy-to-aws/spring-boot-3-spring-mvc-crud/src/main/java/com/luv2code/springboot/thymeleafdemo/dao/EmployeeRepository.java
+/Users/ahmedali/Desktop/Java/Java/deploy-to-aws/spring-boot-3-spring-mvc-crud/src/main/java/com/luv2code/springboot/thymeleafdemo/entity/Employee.java
+/Users/ahmedali/Desktop/Java/Java/deploy-to-aws/spring-boot-3-spring-mvc-crud/src/main/java/com/luv2code/springboot/thymeleafdemo/service/EmployeeService.java
+/Users/ahmedali/Desktop/Java/Java/deploy-to-aws/spring-boot-3-spring-mvc-crud/src/main/java/com/luv2code/springboot/thymeleafdemo/service/EmployeeServiceImpl.java
