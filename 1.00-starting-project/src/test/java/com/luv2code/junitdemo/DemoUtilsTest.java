@@ -2,6 +2,7 @@ package com.luv2code.junitdemo;
 
 import org.junit.jupiter.api.*;
 
+import java.time.Duration;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -83,6 +84,19 @@ class DemoUtilsTest {
     void testLinesMatch() {
         List<String> theList = List.of("luv","2","code");
         assertLinesMatch(theList, demoUtils.getAcademyInList(), "Lines should match");
+    }
+
+    @Test
+    @DisplayName("Throws and Does Not Throw")
+    void testThrowsAndDoesNotThrow() {
+        assertThrows(Exception.class, () -> { demoUtils.throwException(-1);}, "Should throw exception");
+        assertDoesNotThrow(() -> {demoUtils.throwException(1);}, "Should not throw exception");
+    }
+
+    @Test
+    @DisplayName("Timeout")
+    void testTimeout() {
+        assertTimeoutPreemptively(Duration.ofSeconds(3), () -> {demoUtils.checkTimeout();}, "Method should execute in 3 seconds");
     }
 
 }
