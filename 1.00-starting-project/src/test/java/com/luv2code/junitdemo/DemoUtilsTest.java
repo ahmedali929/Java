@@ -42,6 +42,12 @@ class DemoUtilsTest {
     }
 
     @Test
+    @DisplayName("Multiple")
+    void testMultiply() {
+        assertEquals(12, demoUtils.multiply(4,3), "4*3 must be 12");
+    }
+
+    @Test
     @DisplayName("Null and Not Null")
     @Order(0)
     void testNullAndNotNull() {
