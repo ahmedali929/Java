@@ -66,6 +66,16 @@ public class ConditionalTest {
         //execute method and perform asserts
     }
 
+    @Test
+    @EnabledIfEnvironmentVariable(named="LUV2CODE_ENV", matches="DEV")
+    void testOnlyForDevEnvironment() {
+        //execute method and perform asserts
+    }
 
+    @Test
+    @EnabledIfSystemProperty(named="LUV2CODE_SYS_PROP", matches="CI_CD_DEPLOY")
+    void testOnlyForSystemProperty() {
+        //execute method and perform asserts
+    }
 
 }
