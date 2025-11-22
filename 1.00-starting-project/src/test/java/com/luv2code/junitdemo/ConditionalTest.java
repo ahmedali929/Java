@@ -25,4 +25,17 @@ public class ConditionalTest {
         //execute method and perform asserts
     }
 
+    @Test
+    @EnabledOnOs({OS.MAC, OS.WINDOWS})
+    void testForMacAndWindowsOnly() {
+        //execute method and perform asserts
+    }
+
+    @Test
+    @EnabledOnOs(OS.LINUX)
+    void testForLinuxOnly() {
+        //execute method and perform asserts
+    }
+
+
 }
