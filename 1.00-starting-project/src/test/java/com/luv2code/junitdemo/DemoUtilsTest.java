@@ -7,6 +7,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class DemoUtilsTest {
 
     DemoUtils demoUtils;
@@ -34,6 +35,7 @@ class DemoUtilsTest {
 
     @Test
     @DisplayName("Equals and Not Equals")
+    @Order(1)
     void testEqualsAndNotEquals() {
         assertEquals(6, demoUtils.add(2,4), "2+4 must be 6");
         assertNotEquals(6,demoUtils.add(1,9),"1+9 must not be 6");
@@ -41,6 +43,7 @@ class DemoUtilsTest {
 
     @Test
     @DisplayName("Null and Not Null")
+    @Order(0)
     void testNullAndNotNull() {
         String str1 = null;
         String str2 = "luv2code";
@@ -50,6 +53,7 @@ class DemoUtilsTest {
 
     @Test
     @DisplayName("Same and Not Same")
+    @Order(3)
     void testSameAndNotSame() {
         String str = "luv2code";
         assertSame(demoUtils.getAcademy(), demoUtils.getAcademyDuplicate(), "Objects should refer to the same object");
