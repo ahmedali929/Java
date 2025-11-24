@@ -9,7 +9,8 @@ public class FizzBuzz {
         }
         if (i % 3 == 0) {
             return "Buzz";
+        } else {
+            return Integer.toString(i);
         }
-        return null;
     }
 }
