@@ -2,7 +2,7 @@ package com.luv2code.tdd;
 
 import org.junit.jupiter.api.*;
 
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class FizzBuzzTest {
@@ -11,7 +11,13 @@ class FizzBuzzTest {
     @Test
     @Order(1)
     void testForDivisibleByThree() {
-        fail("fail");
+        String expected = "Fizz";
+        assertEquals(expected, FizzBuzz.compute(3), "Should return Fizz");
+    }
+
+    void testForDivisibleByFive() {
+        String expected = "Buzz";
+        assertEquals(expected, FizzBuzz.compute(5), "Should return Buzz");
     }
 
 
