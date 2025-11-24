@@ -32,4 +32,13 @@ class FizzBuzzTest {
     }
 
 
+    @DisplayName("Not Divisible by Three nor Five")
+    @Test
+    @Order(4)
+    void testForNotDivisibleByThreeNorFive() {
+        String expected = "1";
+        assertEquals(expected, FizzBuzz.compute(1), "Should return 1");
+    }
+
+
 }
