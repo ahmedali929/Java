@@ -15,11 +15,21 @@ class FizzBuzzTest {
         assertEquals(expected, FizzBuzz.compute(3), "Should return Fizz");
     }
 
+    @DisplayName("Divisible by Five")
+    @Test
+    @Order(2)
     void testForDivisibleByFive() {
         String expected = "Buzz";
         assertEquals(expected, FizzBuzz.compute(5), "Should return Buzz");
     }
 
+    @DisplayName("Divisible by Three and Five")
+    @Test
+    @Order(3)
+    void testForDivisibleByThreeAndFive() {
+        String expected = "FizzBuzz";
+        assertEquals(expected, FizzBuzz.compute(15), "Should return FizzBuzz");
+    }
 
 
 }
