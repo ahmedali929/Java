@@ -8,12 +8,12 @@ import com.luv2code.component.service.ApplicationService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
-import static org.junit.jupiter.api.Assertions.*;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest(classes= MvcTestingExampleApplication.class)
@@ -28,10 +28,12 @@ public class MockAnnotationTest {
     @Autowired
     StudentGrades studentGrades;
 
-    @Mock
+    //@Mock don't need to use Mock and InjectMock if we use Mockitobean. the service then becomes autowired
+    @MockitoBean
     private ApplicationDao applicationDao;
 
-    @InjectMocks
+    //@InjectMocks
+    @Autowired
     private ApplicationService applicationService;
 
     @BeforeEach
@@ -51,7 +53,13 @@ public class MockAnnotationTest {
         verify(applicationDao).addGradeResultsForSingleClass(studentGrades.getMathGradeResults());
         verify(applicationDao, times(3)).addGradeResultsForSingleClass(studentGrades.getMathGradeResults());
 
+    }
 
+    @DisplayName("Find Gpa")
+    @Test
+    public void assertEqualsTestFindGpa() {
+        when(applicationDao.findGradePointAverage(studentGrades.getMathGradeResults())).thenReturn(88.31);
+        assertEquals(88.31, applicationService.findGradePointAverage(collegeStudentOne.getStudentGrades().getMathGradeResults()));
     }
 
 
