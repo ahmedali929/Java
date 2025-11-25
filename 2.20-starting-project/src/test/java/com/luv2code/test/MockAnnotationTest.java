@@ -48,6 +48,8 @@ public class MockAnnotationTest {
         when(applicationDao.addGradeResultsForSingleClass(studentGrades.getMathGradeResults())).thenReturn(100.00);
 
         assertEquals(100, applicationService.addGradeResultsForSingleClass(collegeStudentOne.getStudentGrades().getMathGradeResults()));
+        verify(applicationDao).addGradeResultsForSingleClass(studentGrades.getMathGradeResults());
+        verify(applicationDao, times(3)).addGradeResultsForSingleClass(studentGrades.getMathGradeResults());
 
 
     }
