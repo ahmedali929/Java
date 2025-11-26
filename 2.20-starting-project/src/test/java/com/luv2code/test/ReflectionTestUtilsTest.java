@@ -43,4 +43,9 @@ public class ReflectionTestUtilsTest {
         assertEquals(1, ReflectionTestUtils.getField(studentOne, "id"));
     }
 
+    @Test
+    public void invokePrivateMethod() {
+        assertEquals("Eric 1", ReflectionTestUtils.invokeMethod(studentOne, "getFirstNameAndId"), "Fail private method not call");
+    }
+
 }
