@@ -31,4 +31,10 @@ public class StudentAndGradeServiceTest {
 
     }
 
+    @Test
+    public void isStudentNullCheck() {
+        assertTrue(studentService.checkIfStudentIsNull(1));
+        assertFalse(studentService.checkIfStudentIsNull(0));
+    }
+
 }
