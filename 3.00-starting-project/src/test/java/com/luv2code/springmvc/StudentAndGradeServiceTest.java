@@ -1,14 +1,19 @@
 package com.luv2code.springmvc;
 
 import com.luv2code.springmvc.models.CollegeStudent;
+import com.luv2code.springmvc.service.StudentAndGradeService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
 
 @TestPropertySource("/application.properties")
 @SpringBootTest
 public class StudentAndGradeServiceTest {
+
+    @Autowired
+    private StudentAndGradeService studentService;
 
     @Test
     @DisplayName("Basic test")
