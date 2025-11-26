@@ -12,6 +12,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.TestPropertySource;
 
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @TestPropertySource("/application.properties")
@@ -32,12 +34,6 @@ public class StudentAndGradeServiceTest {
         jdbc.execute("INSERT INTO student(firstname, lastname, email_address) VALUES ('Eric', 'Roby','eric.roby@luv2code.com')");
     }
 
-    @AfterEach
-    public void setupAfterTransaction() {
-        jdbc.execute("DELETE FROM student");
-        jdbc.execute("ALTER TABLE student ALTER COLUMN ID RESTART WITH 1");
-    }
-
     @Test
     @DisplayName("Basic test")
     public void createStudentService() {
@@ -52,6 +48,22 @@ public class StudentAndGradeServiceTest {
     public void isStudentNullCheck() {
         assertTrue(studentService.checkIfStudentIsNull(1));
         assertFalse(studentService.checkIfStudentIsNull(0));
+    }
+
+    @Test
+    public void deleteStudentService() {
+        Optional<CollegeStudent> deletedCollegeStudent = studentDao.findById(1);
+        assertTrue(deletedCollegeStudent.isPresent(), "Return True");
+        studentService.deleteStudent(1);
+        deletedCollegeStudent = studentDao.findById(1);
+        assertFalse(deletedCollegeStudent.isPresent(), "Return false");
+    }
+        
+
+    @AfterEach
+    public void setupAfterTransaction() {
+        jdbc.execute("DELETE FROM student");
+        jdbc.execute("ALTER TABLE student ALTER COLUMN ID RESTART WITH 1");
     }
 
 }
