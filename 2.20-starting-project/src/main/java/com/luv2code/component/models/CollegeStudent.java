@@ -6,7 +6,17 @@ public class CollegeStudent implements Student {
     private String emailAddress;
     private StudentGrades studentGrades;
 
+    private int id;
+
     public CollegeStudent() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public CollegeStudent(String firstname, String lastname, String emailAddress) {
@@ -66,4 +76,10 @@ public class CollegeStudent implements Student {
     public String getFullName() {
         return getFirstname() + " " + getLastname();
     }
+
+    private String getFirstNameAndId() {
+        return getFirstname() + " " + getId();
+    }
+
+
 }
