@@ -2,6 +2,7 @@ package com.luv2code.springmvc;
 
 import com.luv2code.springmvc.models.CollegeStudent;
 import com.luv2code.springmvc.models.GradebookCollegeStudent;
+import com.luv2code.springmvc.repository.StudentDao;
 import com.luv2code.springmvc.service.StudentAndGradeService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -26,6 +27,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertIterableEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -42,6 +44,9 @@ public class GradebookControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
+
+    @Autowired
+    private StudentDao studentDao;
 
     @Mock
     private StudentAndGradeService studentAndGradeServiceMock;
@@ -88,6 +93,9 @@ public class GradebookControllerTest {
                 .andReturn();
         ModelAndView mav = mvcResult.getModelAndView();
         ModelAndViewAssert.assertViewName(mav, "index");
+
+        CollegeStudent verifyStudent = studentDao.findByEmailAddress("taha.shah@tahashah.com");
+        assertNotNull(verifyStudent, "Student should be found");
 
     }
 
