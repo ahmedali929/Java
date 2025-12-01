@@ -6,8 +6,12 @@ import com.luv2code.springmvc.repository.MathGradesDao;
 import com.luv2code.springmvc.repository.ScienceGradesDao;
 import com.luv2code.springmvc.repository.StudentDao;
 import com.luv2code.springmvc.service.StudentAndGradeService;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.TestPropertySource;
@@ -41,6 +45,30 @@ public class StudentAndGradeServiceTest {
 
     @Autowired
     private HistoryGradesDao historyGradeDao;
+
+    @Value("{sql.script.create.student}")
+    private String sqlAddStudent;
+
+    @Value("{sql.scripts.create.math.grade}")
+    private String sqlAddMathGrade;
+
+    @Value("{sql.scripts.create.science.grade}")
+    private String sqlAddScienceGrade;
+
+    @Value("{sql.scripts.create.history.grade}")
+    private String sqlAddHistoryGrade;
+
+    @Value("{sql.scripts.delete.student}")
+    private String sqlDeleteStudent;
+
+    @Value("{sql.scripts.delete.math.grade}")
+    private String sqlDeleteMathGrade;
+
+    @Value("{sql.scripts.delete.science.grade}")
+    private String sqlDeleteScienceGrade;
+
+    @Value("{sql.scripts.delete.history.grade}")
+    private String sqlDeleteHistoryGrade;
 
     @BeforeEach
     public void setupDatabase() {
