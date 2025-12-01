@@ -135,4 +135,9 @@ public class StudentAndGradeServiceTest {
         assertFalse(studentService.createGrade(80.50, 1, "literature")); //test for invalid subject
     }
 
+    @Test
+    public void deleteGradeService() {
+        assertEquals(1, studentService.deleteGrade(1, "math"), "Returns student id after delete");
+    }
+
 }
