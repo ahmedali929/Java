@@ -171,4 +171,10 @@ public class StudentAndGradeServiceTest {
         assertTrue(gradebookCollegeStudent.getStudentGrades().getHistoryGradeResults().size()==2);
     }
 
+    @Test
+    public void studentInformationServiceReturnNul() {
+        GradebookCollegeStudent gradebookCollegeStudent = studentService.studentInformation(0);
+        assertNull(gradebookCollegeStudent);
+    }
+
 }
