@@ -9,10 +9,7 @@ import com.luv2code.springmvc.repository.MathGradesDao;
 import com.luv2code.springmvc.repository.ScienceGradesDao;
 import com.luv2code.springmvc.repository.StudentDao;
 import com.luv2code.springmvc.service.StudentAndGradeService;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -140,6 +137,12 @@ public class StudentAndGradeServiceTest {
         assertEquals(1, studentService.deleteGrade(1, "math"), "Returns student id after delete");
         assertEquals(1, studentService.deleteGrade(1, "science"), "Returns student id after delete");
         assertEquals(1, studentService.deleteGrade(1, "history"), "Returns student id after delete");
+    }
+
+    @Test
+    public void deleteGradeServiceReturnStudentIdOfZero() {
+        assertEquals(0, studentService.deleteGrade(0, "science"), "No student should have 0 id");
+        assertEquals(0, studentService.deleteGrade(1, "literature"), "No student should have a literature class");
     }
 
 }
