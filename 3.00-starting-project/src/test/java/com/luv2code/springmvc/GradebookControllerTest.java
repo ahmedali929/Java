@@ -169,22 +169,37 @@ public class GradebookControllerTest {
         assertEquals(2, student.getStudentGrades().getMathGradeResults().size());
     }
 
+    @Test
+    public void createAValidGradeHttpRequestStudentDoesNotExistEmptyResponse() throws Exception {
+        MvcResult mvcResult = this.mockMvc.perform(post("/grades")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .param("grade","85.00")
+                        .param("gradeType","history")
+                        .param("studentId", "0"))
+                .andExpect(status().isOk()).andReturn();
+        ModelAndView mav = mvcResult.getModelAndView();
+        ModelAndViewAssert.assertViewName(mav, "error");
+    }
+
+    @Test
+    public void createANonValidGradeHttpRequestGradeTypeDoesNotExistEmptyResponse() throws Exception {
+
+        MvcResult mvcResult = this.mockMvc.perform(post("/grades")
+                .contentType(MediaType.APPLICATION_JSON)
+                .param("grade", "86.00")
+                .param("gradeType", "literature")
+                .param("studentId", "1"))
+                .andExpect(status().isOk()).andReturn();
+
+        ModelAndView mav = mvcResult.getModelAndView();
+        ModelAndViewAssert.assertViewName(mav, "error");
+    }
+
     @AfterEach
     public void afterEach() {
         jdbc.execute("DELETE FROM student");
         jdbc.execute("ALTER TABLE student ALTER COLUMN ID RESTART WITH 1");
     }
 
-    @Test
-    public void createAValidGradeHttpRequestStudentDoesNotExistEmptyResponse() throws Exception {
-        MvcResult mvcResult = this.mockMvc.perform(post("/grades")
-                .contentType(MediaType.APPLICATION_JSON)
-                .param("grade","85.00")
-                .param("gradeType","history")
-                .param("studentId", "0"))
-                .andExpect(status().isOk()).andReturn();
-        ModelAndView mav = mvcResult.getModelAndView();
-        ModelAndViewAssert.assertViewName(mav, "error");
-    }
 
 }
