@@ -46,7 +46,7 @@ public class GradebookController {
 	}
 
 	@GetMapping("/studentInformation/{id}")
-		public String studentInformation(@PathVariable int id, Model m) {
+	public String studentInformation(@PathVariable int id, Model m) {
 
 		if (!studentService.checkIfStudentIsNull(id)) {
 			return "error";
@@ -72,10 +72,42 @@ public class GradebookController {
 		} else {
 			m.addAttribute("historyAverage", "N/A");
 		}
-
-
-
 		return "studentInformation";
+	}
+
+	@PostMapping(value = "/grades")
+	public String createGrade(@RequestParam("grade") double grade, @RequestParam("gradeType") String gradeType, @RequestParam("studentId") int studentId, Model m) {
+		if (!studentService.checkIfStudentIsNull(studentId)) {
+			return "error";
 		}
+		boolean success = studentService.createGrade(grade, studentId, gradeType);
+
+		if (!success) {
+			return "error";
+		}
+
+		GradebookCollegeStudent studentEntity = studentService.studentInformation(studentId);
+
+		m.addAttribute("student", studentEntity);
+
+		if (studentEntity.getStudentGrades().getMathGradeResults().size() > 0) {
+			m.addAttribute("mathAverage", studentEntity.getStudentGrades().findGradePointAverage(studentEntity.getStudentGrades().getMathGradeResults()));
+		} else {
+			m.addAttribute("mathAverage", "N/A");
+		}
+
+		if (studentEntity.getStudentGrades().getScienceGradeResults().size() > 0) {
+			m.addAttribute("scienceAverage", studentEntity.getStudentGrades().findGradePointAverage(studentEntity.getStudentGrades().getScienceGradeResults()));
+		} else {
+			m.addAttribute("scienceAverage", "N/A");
+		}
+
+		if (studentEntity.getStudentGrades().getHistoryGradeResults().size() > 0) {
+			m.addAttribute("historyAverage", studentEntity.getStudentGrades().findGradePointAverage(studentEntity.getStudentGrades().getHistoryGradeResults()));
+		} else {
+			m.addAttribute("historyAverage", "N/A");
+		}
+		return "studentInformation";
+	}
 
 }
