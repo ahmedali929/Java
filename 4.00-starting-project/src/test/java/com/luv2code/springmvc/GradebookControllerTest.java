@@ -1,5 +1,7 @@
 package com.luv2code.springmvc;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.luv2code.springmvc.models.CollegeStudent;
 import com.luv2code.springmvc.repository.HistoryGradesDao;
 import com.luv2code.springmvc.repository.MathGradesDao;
 import com.luv2code.springmvc.repository.ScienceGradesDao;
@@ -9,7 +11,10 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.MediaType;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,6 +23,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.web.servlet.MockMvc;
 
 @TestPropertySource("/application-test.properties")
 @AutoConfigureMockMvc
@@ -51,6 +57,15 @@ public class GradebookControllerTest {
     @Autowired
     private StudentAndGradeService studentService;
 
+    @Autowired
+    private MockMvc mockMvc;
+
+    @Autowired
+    ObjectMapper objectMapper;
+
+    @Autowired
+    private CollegeStudent student;
+
     @Value("${sql.script.create.student}")
     private String sqlAddStudent;
 
@@ -75,12 +90,27 @@ public class GradebookControllerTest {
     @Value("${sql.script.delete.history.grade}")
     private String sqlDeleteHistoryGrade;
 
+    public static final MediaType APPLICATION_JSON_UTF8 = MediaType.APPLICATION_JSON;
+
+    @BeforeAll
+    public static void setup() {
+        request=new MockHttpServletRequest();
+        request.setParameter("firstname", "Taha");
+        request.setParameter("lastname", "Shah");
+        request.setParameter("emailAddress", "tahashah@tahashah.com");
+    }
+
     @BeforeEach
     public void setupDatabase() {
         jdbc.execute(sqlAddStudent);
         jdbc.execute(sqlAddMathGrade);
         jdbc.execute(sqlAddScienceGrade);
         jdbc.execute(sqlAddHistoryGrade);
+    }
+
+    @Test
+    public void placeholder() {
+
     }
 
 
