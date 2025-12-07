@@ -258,6 +258,15 @@ public class GradebookControllerTest {
     }
 
 
+    @Test
+    public void deleteAValidGradeHttpRequestSubjectDoesNotExistEmptyResponse() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.delete("/grades/{id}/{gradeType}", 1, "literature"))
+                .andExpect(status().is4xxClientError())
+                .andExpect(jsonPath("$.status", is(404)))
+                .andExpect(jsonPath("$.message", is("Student or Grade was not found")));
+    }
+
+
     @AfterEach
     public void setupAfterTransaction() {
         jdbc.execute(sqlDeleteStudent);
