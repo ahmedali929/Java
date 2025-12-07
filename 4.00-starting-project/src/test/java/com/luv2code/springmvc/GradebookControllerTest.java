@@ -193,6 +193,22 @@ public class GradebookControllerTest {
                 .andExpect(jsonPath("$.message", is("Student or Grade was not found")));
     }
 
+    @Test
+    public void createAValidGradesHttpRequest() throws Exception {
+        this.mockMvc.perform(post("/grades")
+                .contentType(MediaType.APPLICATION_JSON)
+                .param("grade", "85.00")
+                .param("gradeType", "math")
+                .param("studentId", "1"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(APPLICATION_JSON_UTF8))
+                .andExpect(jsonPath("$.id", is(1)))
+                .andExpect(jsonPath("$.firstname",is( "Taha")))
+                .andExpect(jsonPath("$.lastname", is("Shah")))
+                .andExpect(jsonPath("$.emailAddress", is("tahashah@tahashah.com")))
+                .andExpect(jsonPath("$.studentGrades.mathGradeResults", hasSize(2)));
+    }
+
 
     @AfterEach
     public void setupAfterTransaction() {
