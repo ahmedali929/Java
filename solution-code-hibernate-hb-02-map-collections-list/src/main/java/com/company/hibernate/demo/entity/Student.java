@@ -1,8 +1,8 @@
 package com.company.hibernate.demo.entity;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="student")
@@ -22,9 +22,9 @@ public class Student {
     private String email;
 
     @ElementCollection
-    @CollectionTable(name="image", joinColumns = @JoinColumn(name="student_id"))
+    @CollectionTable(name="image")
     @Column(name="file_name") //defaults to images
-    private Set<String> images = new HashSet<String>();
+    private List<String> images = new ArrayList<String>();
 
     public Student(String firstName, String lastName, String email) {
         this.firstName = firstName;
@@ -64,11 +64,11 @@ public class Student {
         this.email = email;
     }
 
-    public Set<String> getImages() {
+    public List<String> getImages() {
         return images;
     }
 
-    public void setImages(Set<String> images) {
+    public void setImages(List<String> images) {
         this.images = images;
     }
 
