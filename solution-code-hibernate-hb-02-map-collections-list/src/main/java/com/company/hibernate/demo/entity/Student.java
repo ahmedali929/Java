@@ -23,6 +23,7 @@ public class Student {
 
     @ElementCollection
     @CollectionTable(name="image")
+    @OrderColumn
     @Column(name="file_name") //defaults to images
     private List<String> images = new ArrayList<String>();
 
