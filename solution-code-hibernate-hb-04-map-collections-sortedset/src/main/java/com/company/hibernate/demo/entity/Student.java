@@ -28,6 +28,10 @@ public class Student {
     @Column(name="file_name") //defaults to images
     private Set<String> images = new LinkedHashSet<String>();
 
+    public Student() {
+
+    }
+
     public Student(String firstName, String lastName, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
