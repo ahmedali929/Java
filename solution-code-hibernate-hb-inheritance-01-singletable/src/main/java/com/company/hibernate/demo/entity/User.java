@@ -2,9 +2,7 @@ package com.company.hibernate.demo.entity;
 
 import javax.persistence.*;
 
-@Entity
-@Table(name="user")
-@Inheritance(strategy = InheritanceType.JOINED)
+@MappedSuperclass
 public abstract class User {
 
     @Id
