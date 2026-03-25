@@ -4,11 +4,11 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="user")
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class User {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.TABLE)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
