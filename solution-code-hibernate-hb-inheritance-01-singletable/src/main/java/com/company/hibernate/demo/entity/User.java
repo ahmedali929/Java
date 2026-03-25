@@ -60,7 +60,7 @@ public abstract class User {
 
     @Override
     public String toString() {
-        return "Student{" +
+        return "User{" +
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
@@ -68,3 +68,4 @@ public abstract class User {
                 '}';
     }
 }
+
