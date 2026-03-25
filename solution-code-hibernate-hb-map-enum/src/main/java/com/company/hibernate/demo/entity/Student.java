@@ -19,28 +19,15 @@ public class Student {
     @Column(name="email")
     private String email;
 
-    @Embedded
-    private Address homeAddress;
+    @Enumerated(EnumType.STRING)
+    @Column(name="status")
+    private Status status;
 
-    @AttributeOverrides({
-            @AttributeOverride(name="street", column=@Column(name="BILLING_STREET")),
-            @AttributeOverride(name="city", column=@Column(name="BILLING_CITY")),
-            @AttributeOverride(name="city", column=@Column(name="BILLING_ZIPCODE"))
-    })
-    private Address billingAddress;
-
-    public Student(String firstName, String lastName, String email) {
+    public Student(String firstName, String lastName, String email, Status status) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-    }
-
-    public Address getHomeAddress() {
-        return homeAddress;
-    }
-
-    public void setHomeAddress(Address homeAddress) {
-        this.homeAddress = homeAddress;
+        this.status = status;
     }
 
     public int getId() {
@@ -75,12 +62,12 @@ public class Student {
         this.email = email;
     }
 
-    public Address getBillingAddress() {
-        return billingAddress;
+    public Status getStatus() {
+        return status;
     }
 
-    public void setBillingAddress(Address billingAddress) {
-        this.billingAddress = billingAddress;
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     @Override
@@ -90,6 +77,7 @@ public class Student {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
+                ", status=" + status +
                 '}';
     }
 }

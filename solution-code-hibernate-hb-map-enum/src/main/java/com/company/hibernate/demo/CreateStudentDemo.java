@@ -1,12 +1,12 @@
 package com.company.hibernate.demo;
 
-import com.company.hibernate.demo.entity.Address;
+import com.company.hibernate.demo.entity.Status;
 import com.company.hibernate.demo.entity.Student;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-public class CreateStudentAddressDemo {
+public class CreateStudentDemo {
 
     public static void main(String[] args) {
 
@@ -21,18 +21,16 @@ public class CreateStudentAddressDemo {
 
         try {
             //create the object
-            Student tempStudent = new Student("Paul", "Wall", "paul@luv2code.com");
-
-            //create the address object
-            Address billingAddress = new Address("Some Billing Street", "Some Billing City", "101010");
+            Student tempStudent1 = new Student("Paul", "Wall", "paul@luv2code.com", Status.ACTIVE);
+            Student tempStudent2 = new Student("Mary", "Doe", "paul@luv2code.com", Status.INACTIVE);
 
             //start a transaction
             session.beginTransaction();
 
             //save the object
-            System.out.println("Saving the student and address...");
-            tempStudent.setBillingAddress(billingAddress);
-            session.persist(tempStudent);
+            System.out.println("Saving the student...");
+            session.persist(tempStudent1);
+            session.persist(tempStudent2);
 
             //commit the transaction
             session.getTransaction().commit();
