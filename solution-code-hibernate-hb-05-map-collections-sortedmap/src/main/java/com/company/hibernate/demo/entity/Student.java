@@ -28,6 +28,10 @@ public class Student {
     @OrderBy //defaults to sorting by MapKeyColumn which is file_name, ascending
     private SortedMap<String, String> images = new TreeMap<String, String>();
 
+    public Student() {
+
+    }
+
     public Student(String firstName, String lastName, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
