@@ -1,8 +1,6 @@
 package com.company.hibernate.demo.entity;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name="student")
@@ -21,16 +19,21 @@ public class Student {
     @Column(name="email")
     private String email;
 
-    @ElementCollection
-    @CollectionTable(name="image")
-    @OrderColumn
-    @Column(name="file_name") //defaults to images
-    private List<String> images = new ArrayList<String>();
+    @Embedded
+    private Address homeAddress;
 
     public Student(String firstName, String lastName, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+    }
+
+    public Address getHomeAddress() {
+        return homeAddress;
+    }
+
+    public void setHomeAddress(Address homeAddress) {
+        this.homeAddress = homeAddress;
     }
 
     public int getId() {
@@ -63,14 +66,6 @@ public class Student {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public List<String> getImages() {
-        return images;
-    }
-
-    public void setImages(List<String> images) {
-        this.images = images;
     }
 
     @Override

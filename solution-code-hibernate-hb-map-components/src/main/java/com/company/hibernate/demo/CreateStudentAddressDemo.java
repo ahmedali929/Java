@@ -1,13 +1,12 @@
 package com.company.hibernate.demo;
 
+import com.company.hibernate.demo.entity.Address;
 import com.company.hibernate.demo.entity.Student;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import java.util.List;
-
-public class CreateStudentImagesListDemo {
+public class CreateStudentAddressDemo {
 
     public static void main(String[] args) {
 
@@ -23,19 +22,16 @@ public class CreateStudentImagesListDemo {
         try {
             //create the object
             Student tempStudent = new Student("Paul", "Wall", "paul@luv2code.com");
-            List<String> theImages = tempStudent.getImages();
 
-            theImages.add("photo1.jpg");
-            theImages.add("photo2.jpg");
-            theImages.add("photo3.jpg");
-            theImages.add("photo4.jpg");
-            theImages.add("photo5.jpg");
+            //create the address object
+            Address homeAddress = new Address("Some Street", "Some City", "12345");
 
             //start a transaction
             session.beginTransaction();
 
             //save the object
-            System.out.println("Saving the student and images...");
+            System.out.println("Saving the student and address...");
+            tempStudent.setHomeAddress(homeAddress);
             session.persist(tempStudent);
 
             //commit the transaction
