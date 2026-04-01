@@ -1,10 +1,7 @@
 package com.company.books.controller;
 
 import com.company.books.entity.Book;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,11 +26,11 @@ public class BooksController {
         new Book("Title Seven", "Author Seven", "politics")
         ));
     }
-
-    @GetMapping("/api/books")
-    public List<Book> getBooks() {
-        return books;
-    }
+//
+//    @GetMapping("/api/books")
+//    public List<Book> getBooks() {
+//        return books;
+//    }
 
     @GetMapping("/api/books/{title}")
     public Book getBookByTitle(@PathVariable String title) {
@@ -48,9 +45,18 @@ public class BooksController {
         if (category == null) {
             return books;
         }
-
         return books.stream()
                 .filter(book -> book.getCategory().equalsIgnoreCase(category))
                 .toList();
+    }
+
+    @PostMapping("/api/books")
+    public void createBook(@RequestBody Book newBook) {
+        boolean isNewBook = books
+                .stream()
+                .noneMatch(book -> book.getTitle().equalsIgnoreCase(newBook.getTitle()));
+        if (isNewBook) {
+            books.add(newBook);
+        }
     }
 }
