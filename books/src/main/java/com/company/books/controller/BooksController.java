@@ -18,13 +18,12 @@ public class BooksController {
 
     private void initializeBooks() {
         books.addAll(List.of(
-        new Book("Title One", "Author One", "science"),
-        new Book("Title Two", "Author Two", "history"),
-        new Book("Title Three", "Author Three", "math"),
-        new Book("Title Four", "Author Four", "ethics"),
-        new Book("Title Five", "Author Five", "religion"),
-        new Book("Title Six", "Author Six", "philosophy"),
-        new Book("Title Seven", "Author Seven", "politics")
+        new Book(1, "Computer Science Pro", "Hasim Shah", "Computer Science", 5),
+                new Book(2, "Java Spring Master", "Basim Shah", "Computer Science", 5),
+                new Book(3, "Why 1+1 Rocks", "Hasin Shah", "Math", 5),
+                new Book(4, "How Bears Hibernate", "Dara Shah", "Science", 2),
+                new Book(5, "A Pirate's Treasure", "Aabis Alvi", "History", 3),
+                new Book(6, "Why 2+2 is Better", "Basil Alvi", "Math", 1)
         ));
     }
 //
