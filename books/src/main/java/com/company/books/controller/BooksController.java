@@ -56,7 +56,7 @@ public class BooksController {
 
         long id = books.isEmpty() ? 1 : books.get(books.size() - 1).getId() + 1;
 
-        Book book = new Book(id, bookRequest.getTitle(), bookRequest.getAuthor(), bookRequest.getCategory(), bookRequest.getRating());
+        Book book = convertToBook(id, bookRequest);
 
         books.add(book);
     }
@@ -75,4 +75,9 @@ public class BooksController {
     public void deleteBook(@PathVariable long id) {
         books.removeIf(book -> book.getId() == id);
     }
+
+    private Book convertToBook(long id, BookRequest bookRequest) {
+        return new Book(id, bookRequest.getTitle(), bookRequest.getAuthor(), bookRequest.getCategory(), bookRequest.getRating());
+    }
+
 }
