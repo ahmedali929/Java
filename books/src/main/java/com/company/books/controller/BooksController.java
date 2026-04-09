@@ -116,7 +116,7 @@ public class BooksController {
 
     @ExceptionHandler
     public ResponseEntity<BookErrorResponse> handleException(Exception exc) {
-        BookErrorResponse error = new BookErrorResponse(HttpStatus.BAD_REQUEST.value(), exc.getMessage(), System.currentTimeMillis());
+        BookErrorResponse error = new BookErrorResponse(HttpStatus.BAD_REQUEST.value(), "Invalid request", System.currentTimeMillis());
 
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
