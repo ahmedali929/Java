@@ -7,14 +7,14 @@ import jakarta.validation.constraints.Size;
 
 public class EmployeeRequest {
 
-    @NotBlank
-    @Size(min=2, max=50)
+    @NotBlank(message = "First name is required")
+    @Size(min=2, max=50, message = "First name must be between 2 and 50 characters long")
     private String firstName;
 
-    @NotBlank @Size(min=2, max=50)
+    @NotBlank(message = "Last name is required") @Size(min=2, max=50,message = "Last name must be between 2 and 50 characters long")
     private String lastName;
 
-    @NotBlank @Email
+    @NotBlank(message = "Email is required") @Email(message = "Please provide a valid email address")
     private String email;
 
     public EmployeeRequest(String firstName, String lastName, String email) {
