@@ -2,6 +2,7 @@ package com.company.springboot.employees.service;
 
 import com.company.springboot.employees.dao.EmployeeDAO;
 import com.company.springboot.employees.entity.Employee;
+import com.company.springboot.employees.request.EmployeeRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,8 +29,23 @@ public class EmployeeServiceImpl implements EmployeeService{
     }
 
     @Override
-    public Employee save(Employee theEmployee) {
-        return employeeDAO.save(theEmployee);
+    public Employee save(EmployeeRequest EmployeeRequest) {
+        return null;
+    }
+
+    @Override
+    public Employee update(long id, EmployeeRequest employeeRequest) {
+        return null;
+    }
+
+    @Override
+    public Employee convertToEmployee(long id, EmployeeRequest employeeRequest) {
+        return null;
+    }
+
+    @Override
+    public Employee save(EmployeeRequest EmployeeRequest) {
+        return null;
     }
 
     @Override
