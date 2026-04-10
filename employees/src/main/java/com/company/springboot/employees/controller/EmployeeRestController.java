@@ -44,4 +44,18 @@ public class EmployeeRestController {
         return employeeService.save(theEmployee);
     }
 
+    @Operation(summary = "Update an employee", description = "Update the details of current employee")
+    @ResponseStatus(HttpStatus.OK)
+    @PutMapping("/{employeeId}")
+    public Employee updateEmployee(@PathVariable @Min(value = 1) long employeeId, @Valid @RequestBody EmployeeRequest employeeRequest) {
+        return employeeService.update(employeeId, employeeRequest);
+    }
+
+    @Operation(summary = "Delete an employee", description = "delete an employee by id")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("/{employeeId}")
+    public void deleteEmployee(@PathVariable @Min(value = 1) long employeeId) {
+        employeeService.deleteById(employeeId);
+    }
+
 }
