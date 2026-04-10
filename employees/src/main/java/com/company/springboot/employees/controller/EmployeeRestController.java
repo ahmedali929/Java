@@ -1,9 +1,11 @@
 package com.company.springboot.employees.controller;
 
 import com.company.springboot.employees.entity.Employee;
+import com.company.springboot.employees.request.EmployeeRequest;
 import com.company.springboot.employees.service.EmployeeService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -33,6 +35,13 @@ public class EmployeeRestController {
     @GetMapping("/{employeeId}")
     public Employee getEmployee(@PathVariable @Min(value = 1) long employeeId) {
         return employeeService.findById(employeeId);
+    }
+
+    @Operation(summary = "Create a new employee", description = "Add a new employee")
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping
+    public Employee addEmployee(@Valid @RequestBody EmployeeRequest theEmployee) {
+        return employeeService.save(theEmployee);
     }
 
 }
