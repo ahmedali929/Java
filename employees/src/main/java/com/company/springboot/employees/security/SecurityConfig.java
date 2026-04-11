@@ -41,6 +41,7 @@ public class SecurityConfig {
     public SecurityFilterChain filerChain(HttpSecurity http) throws Exception {
 
         http.authorizeHttpRequests(configurer -> configurer
+                .requestMatchers("/docs/**","/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html").permitAll()
                 .requestMatchers(HttpMethod.GET, "/api/employees").hasRole("EMPLOYEE")
                 .requestMatchers(HttpMethod.GET, "/api/employees/**").hasRole("EMPLOYEE")
                 .requestMatchers(HttpMethod.POST, "/api/employees").hasRole("MANAGER")
