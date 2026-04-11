@@ -1,3 +1,6 @@
 2026-04-11 19:14:13.131066-04:00 jdbc[13]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERNAME" not found; SQL statement:
 select * from username [42102-240]
+2026-04-11 19:25:52.696002-04:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found; SQL statement:
+select * from users [42102-240]
