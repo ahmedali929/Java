@@ -23,7 +23,7 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private String lastName;
 
-    @Column(nullable = false)
+    @Column(unique = true, length = 100, nullable = false)
     private String email;
 
     @Column(nullable = false)
@@ -46,14 +46,12 @@ public class User implements UserDetails {
 
     public User() {};
 
-    public User(long id, String firstName, String lastName, String email, String password, Date createdAt, Date updatedAt, List<Authority> authorities, List<Todo> todos) {
+    public User(long id, String firstName, String lastName, String email, String password, List<Authority> authorities, List<Todo> todos) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
         this.authorities = authorities;
         this.todos = todos;
     }
@@ -97,7 +95,27 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return null;
+        return email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return UserDetails.super.isAccountNonExpired();
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return UserDetails.super.isAccountNonLocked();
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return UserDetails.super.isCredentialsNonExpired();
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return UserDetails.super.isEnabled();
     }
 
     public void setPassword(String password) {
