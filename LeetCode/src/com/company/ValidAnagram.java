@@ -18,10 +18,7 @@ public class ValidAnagram {
         Arrays.sort(sArray);
         char[] tArray = t.toCharArray();
         Arrays.sort(tArray);
-        if (Arrays.equals(sArray, tArray)) {
-            return true;
-        }
-        return false;
+        return Arrays.equals(sArray, tArray);
 
     }
 
