@@ -1,7 +1,6 @@
 package com.company.springboot.todos.service;
 
 import com.company.springboot.todos.entity.*;
-import com.company.springboot.todos.entity.User;
 import com.company.springboot.todos.repository.UserRepository;
 import com.company.springboot.todos.request.RegisterRequest;
 import org.springframework.security.crypto.password.PasswordEncoder;
