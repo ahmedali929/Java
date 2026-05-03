@@ -5,9 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d50ac8d2-d717-44aa-b824-54e19d20a6fc" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/todos/src/main/java/com/company/springboot/todos/config/SwaggerConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/todos/src/main/java/com/company/springboot/todos/response/UserResponse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/todos/src/main/java/com/company/springboot/todos/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/todos/src/main/java/com/company/springboot/todos/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todos/src/main/java/com/company/springboot/todos/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/todos/src/main/java/com/company/springboot/todos/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todos/src/main/java/com/company/springboot/todos/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/todos/src/main/java/com/company/springboot/todos/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todos/src/main/java/com/company/springboot/todos/service/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/todos/src/main/java/com/company/springboot/todos/service/UserServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

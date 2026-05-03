@@ -1,9 +1,11 @@
 package com.company.springboot.todos.service;
 
-import com.company.springboot.todos.entity.User;
+import com.company.springboot.todos.response.UserResponse;
+
+import java.nio.file.AccessDeniedException;
 
 public interface UserService{
 
-    User getUserInfo();
+    UserResponse getUserInfo() throws AccessDeniedException;
 
 }

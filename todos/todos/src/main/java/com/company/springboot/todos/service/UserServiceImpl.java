@@ -1,7 +1,9 @@
 package com.company.springboot.todos.service;
 
+import com.company.springboot.todos.entity.Authority;
 import com.company.springboot.todos.entity.User;
 import com.company.springboot.todos.repository.UserRepository;
+import com.company.springboot.todos.response.UserResponse;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -20,7 +22,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional(readOnly = true)
-    public User getUserInfo() {
+    public UserResponse getUserInfo() throws AccessDeniedException {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication == null || !authentication.isAuthenticated() || authentication.getPrincipal().equals("anonymousUser")) {
@@ -28,6 +30,7 @@ public class UserServiceImpl implements UserService {
         }
 
 
-        return (User) Authentication.getPrincipal();
+        User user = Authentication.getPrincipal();
+        return new UserResponse(user.getId(), user.getFirstName() + " " + user.getLastName(), user.getEmail(), user.getAuthorities().stream().map(auth -> (Authority) auth).toList());
     }
 }

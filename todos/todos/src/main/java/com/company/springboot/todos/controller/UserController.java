@@ -1,11 +1,13 @@
 package com.company.springboot.todos.controller;
 
-import com.company.springboot.todos.entity.User;
+import com.company.springboot.todos.response.UserResponse;
 import com.company.springboot.todos.service.UserService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.nio.file.AccessDeniedException;
 
 @Tag(name="User REST API endpoints", description = "Operations related to info about current user")
 @RestController
@@ -19,7 +21,7 @@ public class UserController {
     }
 
     @GetMapping("/info")
-    public User getUserInfo() {
+    public UserResponse getUserInfo() throws AccessDeniedException {
         return userService.getUserInfo();
     }
 }
