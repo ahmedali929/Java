@@ -34,7 +34,7 @@ public class TodoServiceImpl implements TodoService {
         Todo savedTodo = todoRepository.save(todo);
 
         TodoResponse todoResponse = new TodoResponse(
-                savedTodo.getId(), savedTodo.getTitle(), savedTodo.getDescription(), , savedTodo.getPriority(), savedTodo.isComplete()
+                savedTodo.getId(), savedTodo.getTitle(), savedTodo.getDescription(), savedTodo.getPriority(), savedTodo.isComplete()
         );
 
         return todoResponse;
