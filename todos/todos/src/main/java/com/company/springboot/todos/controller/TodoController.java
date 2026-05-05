@@ -9,6 +9,8 @@ import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Tag(name = "Todo REST API", description = "Operations for managing user Todos")
 @RestController
 @RequestMapping("/api/todos")
@@ -25,6 +27,13 @@ public class TodoController {
     @PostMapping
     public TodoResponse createTodo(@Valid @RequestBody TodoRequest todoRequest) {
         return todoService.createTodo(todoRequest);
+    }
+
+    @Operation(summary = "Get all todos for user", description = "Fetch all todos from signed in user")
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping
+    public List<TodoResponse> getAllTodos() {
+        return todoService.getAllTodos();
     }
 
 }
