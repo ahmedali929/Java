@@ -6,6 +6,7 @@ import com.company.springboot.todos.service.TodoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,6 +35,13 @@ public class TodoController {
     @GetMapping
     public List<TodoResponse> getAllTodos() {
         return todoService.getAllTodos();
+    }
+
+    @Operation(summary = "Update todo for user", description = "Update todo for the signed in user")
+    @ResponseStatus(HttpStatus.OK)
+    @PutMapping("/{id}")
+    public TodoResponse toggleTodoCompletion(@PathVariable @Min(1) long id) {
+        return todoService.toggleTodoCompletion(id);
     }
 
 }
