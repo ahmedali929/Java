@@ -56,7 +56,6 @@ public class TodoServiceImpl implements TodoService {
     public TodoResponse toggleTodoCompletion(long id) {
         User currentUser = findAuthenticatedUser.getAuthenticatedUser();
         Optional<Todo> todo = todoRepository.findByIdAndOwner(id, currentUser);
-
         if (todo.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Todo not found");
         }
@@ -65,6 +64,18 @@ public class TodoServiceImpl implements TodoService {
         Todo updatedTodo = todoRepository.save(todo.get());
 
         return convertToTodoResponse(updatedTodo);
+    }
+
+    @Override
+    @Transactional
+    public void deleteTodo(long id) {
+        User currentUser = findAuthenticatedUser.getAuthenticatedUser();
+        Optional<Todo> todo = todoRepository.findByIdAndOwner(id, currentUser);
+        if (todo.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Todo not found");
+        }
+
+        todoRepository.delete(todo.get());
     }
 
     private TodoResponse convertToTodoResponse(Todo todo) {
