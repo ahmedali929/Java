@@ -6,3 +6,4 @@ let lastName: string = "Shah";
 console.log(found);
 console.log("The grade is " + grade);
 console.log("Hi " + firstName + " " + lastName);
+console.log(`Trying to use the ticks, by ${firstName} ${lastName}`);
