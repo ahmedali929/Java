@@ -1,0 +1,21 @@
+# Visual Studio / VS Code local files
+.vs/
+.vscode/
+
+# Node / React / Vite
+node_modules/
+dist/
+.env
+.env.local
+
+# Java / Spring Boot
+target/
+*.class
+
+# IntelliJ
+.idea/
+*.iml
+
+# OS files
+.DS_Store
+Thumbs.db
