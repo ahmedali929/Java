@@ -1,4 +1,3 @@
-import bookLuv2Code from './../../Images/BooksImages/book-luv2code-1000.png'
 import { ReturnBook } from './ReturnBook'
 
 export const Carousel = () => {
