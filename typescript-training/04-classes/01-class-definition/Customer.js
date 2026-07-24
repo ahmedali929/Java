@@ -1,12 +1,33 @@
 "use strict";
-class Customer {
-    firstName;
-    lastName;
-    constructor(firstName, lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+var Customer = /** @class */ (function () {
+    function Customer(firstName, lastName) {
+        this._firstName = firstName;
+        this._lastName = lastName;
     }
-}
-let myCustomer = new Customer("Taha", "Shah");
+    Object.defineProperty(Customer.prototype, "firstName", {
+        get: function () {
+            return this._firstName;
+        },
+        set: function (value) {
+            this._firstName = value;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Customer.prototype, "lastName", {
+        get: function () {
+            return this._lastName;
+        },
+        set: function (value) {
+            this._lastName = value;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    return Customer;
+}());
+var myCustomer = new Customer("Taha", "Shah");
+myCustomer.firstName = "Ahmed";
+myCustomer.lastName = "Ali";
 console.log(myCustomer.firstName);
 console.log(myCustomer.lastName);
